@@ -2,21 +2,25 @@ package xyz.kolokolov.console.core;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import xyz.kolokolov.console.model.Command;
 import xyz.kolokolov.console.model.Request;
 import xyz.kolokolov.console.valudation.InputValidator;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class RequestParserTest {
 
     private RequestParser sut;
+    @Mock
     private InputValidator validator;
 
     @BeforeEach
     void setUp() {
-        this.validator = Mockito.mock(InputValidator.class);
         this.sut = new RequestParser(validator);
     }
 
@@ -24,7 +28,7 @@ class RequestParserTest {
     void createLineTest() {
         // Given
         String input = "create test";
-        Mockito.when(validator.validate(input)).thenReturn(true);
+        when(validator.validate(input)).thenReturn(true);
 
         // When
         Request request = sut.processLine(input);
@@ -38,7 +42,7 @@ class RequestParserTest {
     void deleteLineTest() {
         // Given
         String input = "delete test";
-        Mockito.when(validator.validate(input)).thenReturn(true);
+        when(validator.validate(input)).thenReturn(true);
 
         // When
         Request request = sut.processLine(input);
@@ -52,7 +56,7 @@ class RequestParserTest {
     void updateLineTest() {
         // Given
         String input = "list test";
-        Mockito.when(validator.validate(input)).thenReturn(true);
+        when(validator.validate(input)).thenReturn(true);
 
         // When
         Request request = sut.processLine(input);
@@ -66,7 +70,7 @@ class RequestParserTest {
     void unknownLineTest() {
         // Given
         String input = "not_exits test";
-        Mockito.when(validator.validate(input)).thenReturn(false);
+        when(validator.validate(input)).thenReturn(false);
 
         // When
         Request request = sut.processLine(input);
