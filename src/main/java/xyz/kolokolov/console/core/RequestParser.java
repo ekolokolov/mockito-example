@@ -11,7 +11,11 @@ public class RequestParser {
     private static final int COMMAND_INDEX = 0;
     private static final int VALUE_INDEX = 1;
 
-    private final InputValidator validator = new InputValidator();
+    private final InputValidator validator;
+
+    public RequestParser(InputValidator validator) {
+        this.validator = validator;
+    }
 
     public Request processLine(String string){
         if (!validator.validate(string)) {

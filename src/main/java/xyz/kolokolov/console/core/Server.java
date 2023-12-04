@@ -2,12 +2,16 @@ package xyz.kolokolov.console.core;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Server {
 
-    private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    private final AppProcessor application = new AppProcessor();
+    private final BufferedReader reader;
+    private final AppProcessor application;
+
+    public Server(BufferedReader reader, AppProcessor application) {
+        this.reader = reader;
+        this.application = application;
+    }
 
     public void run(){
         while (true) {

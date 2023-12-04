@@ -1,49 +1,61 @@
 package xyz.kolokolov.console.controllers;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import xyz.kolokolov.console.core.PeopleRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainControllerTest {
 
+    private MainController mainController;
+    private PeopleRepository peopleRepository;
+
+    @BeforeEach
+    void setUp() {
+        this.peopleRepository = Mockito.mock(PeopleRepository.class);
+        this.mainController = new MainController(peopleRepository);
+    }
+
     @Test
     void crete() {
-        MainController mainController = new MainController();
-        String name = mainController.crete("name");
-        assertEquals("Person name - 1's was created.", name);
-        name = mainController.crete("name");
-        assertEquals("Person name - 2's was created.", name);
+        // Given
+        String request = "request";
+        Mockito.when(peopleRepository.create(request)).thenReturn(1);
+
+        // When
+        String name = mainController.crete(request);
+
+        // Then
+        assertEquals("Person request - 1's was created.", name);
     }
 
     @Test
     void deleteCountTest() {
-        MainController mainController = new MainController();
-        mainController.crete("name");
-        mainController.crete("name");
-        String result = mainController.delete("name");
-        assertEquals("2 persons with name \"name\" was deleted.", result);
+        // Given
+        String request = "request";
+        Mockito.when(peopleRepository.delete(request)).thenReturn(78);
+
+        // When
+        String name = mainController.delete(request);
+
+        // Then
+        assertEquals("78 persons with name \"request\" was deleted.", name);
     }
 
-    @Test
-    void deleteZeroTest() {
-        MainController mainController = new MainController();
-        String name = mainController.delete("name");
-        assertEquals("0 persons with name \"name\" was deleted.", name);
-    }
 
     @Test
     void listCountTest() {
-        MainController mainController = new MainController();
-        mainController.crete("name");
-        mainController.crete("name");
-        String result = mainController.list("name");
-        assertEquals("2 persons with name \"name\" was found.", result);
+        // Given
+        String request = "request";
+        Mockito.when(peopleRepository.find(request)).thenReturn(33);
+
+        // When
+        String name = mainController.list(request);
+
+        // Then
+        assertEquals("33 persons with name \"request\" was found.", name);
     }
 
-    @Test
-    void listZeroTest() {
-        MainController mainController = new MainController();
-        String result = mainController.list("name");
-        assertEquals("0 persons with name \"name\" was found.", result);
-    }
 }

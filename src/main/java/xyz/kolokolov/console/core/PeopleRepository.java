@@ -3,6 +3,9 @@ package xyz.kolokolov.console.core;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Репозиторий представляет из себя "хранилище данных"
+ */
 public class PeopleRepository {
 
     private final Map<String, Integer> store = new HashMap<>();

@@ -4,7 +4,11 @@ import xyz.kolokolov.console.core.PeopleRepository;
 
 public class MainController {
 
-    private final PeopleRepository peopleRepository = new PeopleRepository();
+    private final PeopleRepository peopleRepository;
+
+    public MainController(PeopleRepository peopleRepository) {
+        this.peopleRepository = peopleRepository;
+    }
 
     public String crete(String request) {
         int count = peopleRepository.create(request);
