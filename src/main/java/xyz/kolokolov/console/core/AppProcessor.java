@@ -12,7 +12,7 @@ public class AppProcessor {
         this.dispatcher = dispatcher;
     }
 
-    public String process(String command){
+    public String process(String command) {
         Request request = parser.processLine(command);
         return dispatcher.dispatch(request);
     }

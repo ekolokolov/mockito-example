@@ -13,7 +13,7 @@ public class Server {
         this.application = application;
     }
 
-    public void run(){
+    public void run() {
         while (true) {
             try {
                 String line = reader.readLine();

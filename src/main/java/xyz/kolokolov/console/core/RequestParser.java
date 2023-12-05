@@ -17,7 +17,7 @@ public class RequestParser {
         this.validator = validator;
     }
 
-    public Request processLine(String string){
+    public Request processLine(String string) {
         if (!validator.validate(string)) {
             return new Request(Command.UNKNOWN, ERROR_MESSAGE);
         }

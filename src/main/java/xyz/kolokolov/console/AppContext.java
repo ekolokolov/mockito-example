@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 
 public class AppContext {
 
-    public static Server createAppServer(){
+    public static Server createAppServer() {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         return new Server(bufferedReader, getApplication());
     }
